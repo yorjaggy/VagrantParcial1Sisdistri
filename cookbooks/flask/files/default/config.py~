@@ -1,0 +1,35 @@
+# Flask config.py
+#$host        = "host=192.168.56.102";
+#$port        = "port=5432";
+#$dbname      = "dbname=swn";
+#$credentials = "user=pi password=security++";
+import os
+
+SQLALCHEMY_DATABASE_URI = "postgresql://pi:security++@192.168.56.102:5432/swn"
+
+data="postgresql://pi:security++@192.168.56.102:5432/swn"
+
+#SQLALCHEMY_DATABASE_URI = os.environ['OPENSHIFT_POSTGRESQL_DB_URL']
+SQLALCHEMY_ECHO = False
+SECRET_KEY = 'secret key'
+DEBUG = True
+
+
+import psycopg2
+
+# Try to connect
+
+try:
+    conn=psycopg2.connect("dbname='swn' user='pi' password='security++'")
+except:
+    print "I am unable to connect to the database."
+
+cur = conn.cursor()
+try:
+    cur.execute("""SELECT * from devices""")
+except:
+    print "I can't SELECT from bar"
+
+rows = cur.fetchall()
+for row in rows:
+    print "   ", row[1][1]

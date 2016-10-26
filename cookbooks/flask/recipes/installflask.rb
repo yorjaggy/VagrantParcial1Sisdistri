@@ -1,0 +1,76 @@
+execute 'prepareflask' do
+  command 'sudo rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm'
+end
+
+bash "open port" do
+	user "root"
+	code <<-EOH
+	sudo yum install -y python-pip
+	EOH
+end
+
+execute 'updatepip' do
+  command 'sudo pip install --upgrade pip'
+end
+
+execute 'installFlask' do
+  command 'sudo pip install Flask'
+end
+
+execute 'installPsycopg2' do
+  command 'sudo yum install python-psycopg2.i686 -y'
+end
+
+execute 'installFlaskSQLAlchemy' do
+  command 'sudo pip install Flask-SQLAlchemy'
+end
+
+bash "open port" do
+	user "root"
+	code <<-EOH
+	iptables -I INPUT -p tcp --dport 5000 -j ACCEPT
+	service iptables save
+	EOH
+end
+
+bash "create folders" do
+	user "root"
+	code <<-EOH
+	mkdir /home/vagrant/restFlaskApp
+	EOH
+end
+
+bash "create folders2" do
+	user "root"
+	code <<-EOH
+	mkdir /home/vagrant/restFlaskApp/templates
+	EOH
+end
+
+cookbook_file "/home/vagrant/restFlaskApp/app.py" do
+	source "app.py"
+	mode 0711
+	owner "root"
+	group "root"
+        action :create
+end
+
+cookbook_file "/home/vagrant/restFlaskApp/templates/list.html" do
+	source "list.html"
+	mode 0711
+	owner "root"
+	group "root"
+        action :create
+end
+
+cookbook_file "/etc/init/flaskvice.conf" do
+	source "flaskvice.conf"
+	mode 0711
+	owner "root"
+	group "root"
+        action :create
+end
+
+execute 'startService' do
+  command 'sudo start flaskvice'
+end

@@ -1,0 +1,17 @@
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pi:security++@192.168.56.102:5432/swn'
+
+
+from hello import app
+from models import db
+
+db.create_all()
+
+from models import Category
+work = Category(name=u'work')
+home = Category(name=u'home')
+ 
+db.session.add(work)
+db.session.add(home)
+db.session.commit()
+
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: category [SQL: u'INSERT INTO category (name) VALUES (?)'] [parameters: (u'work',)]
