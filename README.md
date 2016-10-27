@@ -1,6 +1,6 @@
 # Vagrant Midterm 1 - Provisioning a machine with a Flask service and their connection with a Postgres database
 
-![alt tag](https://github.com/yorjaggy/vagrantExercise1/blob/master/cookbooks/img1.png)
+![alt tag](https://github.com/yorjaggy/VagrantParcial1Sisdistri/blob/master/images/1.png)
 
 In this exercise we use vagrant for provide a environment like the showed in the imagen 1: A centos machine with a microframework and a database in postgres. 
 
