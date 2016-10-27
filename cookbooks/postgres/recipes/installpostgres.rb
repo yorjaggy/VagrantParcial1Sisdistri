@@ -6,16 +6,6 @@ yum_package 'postgresql94-server' do
   action :install
 end
 
-#execute 'preparepostgis' do
-#  command 'sudo rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm'
-#end
-
-=begin
-yum_package 'postgis2_94' do
-  action :install
-end
-=end
-
 execute 'initdb' do
   command 'sudo service postgresql-9.4 initdb'
 end
