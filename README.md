@@ -18,5 +18,8 @@ We implement 2 cookbooks:
 
 To run this exercise, clone this repository and realize the "vagrant up" command, remember to use an image of CentOs6.4. If the process end succesfully you will be able to connect via ssh to some of the virtual machines created. In other cases you have to check in your configurations allow you to created this environment.
 
+Video:
+https://www.youtube.com/watch?v=7oRs6xQBtwA&feature=youtu.be
+
 developed by:
 *yorjaggy
